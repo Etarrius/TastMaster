@@ -16,6 +16,10 @@ function App() {
     setTasks(updatedTasks);
   };
 
+  const deleteAllTasks = () => {
+    setTasks([]);
+  };
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter") addTask();
   };
@@ -41,24 +45,33 @@ function App() {
         </div>
 
         {/* Task List */}
-        <ul className="task-list">
-          {tasks.map((task, index) => (
-            <li key={index} className="task-item">
-              <span>{task}</span>
-              <button
-                onClick={() => deleteTask(index)}
-                className="delete-btn"
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div className="task-list-container">
+          <ul className="task-list">
+            {tasks.map((task, index) => (
+              <li key={index} className="task-item">
+                <span>{task}</span>
+                <button
+                  onClick={() => deleteTask(index)}
+                  className="delete-btn"
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        {/* Task Count */}
-        <p className="task-count">
-          You have {tasks.length} pending {tasks.length === 1 ? "task" : "tasks"}.
-        </p>
+        {/* Task Count and Delete All */}
+        <div className="task-footer">
+          <p className="task-count">
+            You have {tasks.length} pending {tasks.length === 1 ? "task" : "tasks"}.
+          </p>
+          {tasks.length > 0 && (
+            <button onClick={deleteAllTasks} className="delete-all-btn">
+              Delete All
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
